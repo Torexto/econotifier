@@ -1,6 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import { Clock3, Leaf } from "lucide-react";
 import { getRCEPLN, type RcePriceRecord } from "@/lib/api/pse";
-import { useQuery } from "@tanstack/react-query";
 
 function findCheapestWindow(records: RcePriceRecord[], slotCount = 4) {
    if (records.length < slotCount) return null;

@@ -1,7 +1,7 @@
-import { getGENJW, type GenerationUnitRecord } from "@/lib/api/pse";
 import { useQuery } from "@tanstack/react-query";
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
+import { type GenerationUnitRecord, getGENJW } from "@/lib/api/pse";
 
 interface ParsedUnit {
    code: string;

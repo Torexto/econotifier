@@ -135,9 +135,7 @@ function App() {
                      <p className="eyebrow">
                         <span className="live-dot" /> Monitor energii w Polsce
                      </p>
-                     <h1>
-                        Energia pod <em>kontrolą.</em>
-                     </h1>
+                     <h1>Obraz systemu energetycznego.</h1>
                      <p className="hero-description">
                         Sprawdzaj ceny, zapotrzebowanie i pracę krajowych
                         jednostek wytwórczych w jednym miejscu.
@@ -151,15 +149,37 @@ function App() {
                         </a>
                      </div>
                   </div>
-                  <div className="hero-orb" aria-hidden="true">
-                     <div className="orb-core">
-                        <Bolt size={36} fill="currentColor" />
+                  <aside
+                     className="hero-status"
+                     aria-label="Status źródła danych"
+                  >
+                     <div className="hero-status-header">
+                        <span>Źródło danych</span>
+                        <span className="status-live">
+                           <i /> Aktywne
+                        </span>
                      </div>
-                     <span className="orbit orbit-one" />
-                     <span className="orbit orbit-two" />
-                     <span className="orb-label label-top">PSE data</span>
-                     <span className="orb-label label-bottom">na żywo</span>
-                  </div>
+                     <p className="hero-status-title">
+                        Polskie Sieci Elektroenergetyczne
+                     </p>
+                     <dl className="overview-metrics">
+                        <div>
+                           <dt>Ceny</dt>
+                           <dd>RCE</dd>
+                        </div>
+                        <div>
+                           <dt>Popyt</dt>
+                           <dd>KSE</dd>
+                        </div>
+                        <div>
+                           <dt>Generacja</dt>
+                           <dd>JW</dd>
+                        </div>
+                     </dl>
+                     <p className="hero-status-note">
+                        Dane odświeżane co 15 minut
+                     </p>
+                  </aside>
                </section>
                <section className="dashboard-section price-section" id="prices">
                   <div className="section-heading">
