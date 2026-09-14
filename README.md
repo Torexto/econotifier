@@ -1,4 +1,27 @@
-# React + TypeScript + Vite
+# econotifier
+
+Energy market dashboard backed by PSE data.
+
+## Redis cache
+
+Production PSE requests go through the Vercel Function at `/api/pse/[dataset]`.
+Responses are cached in Redis for five minutes using dataset, date, and limit as
+the cache key. Set these variables in Vercel (and locally in `.env.local`) to
+enable it:
+
+```bash
+UPSTASH_REDIS_REST_URL=
+UPSTASH_REDIS_REST_TOKEN=
+```
+
+The route also accepts Vercel KV-compatible `KV_REST_API_URL` and
+`KV_REST_API_TOKEN` variables. It remains available if Redis is temporarily
+unavailable; the `X-Cache` response header reports `HIT`, `MISS`, or `BYPASS`.
+
+Run the app with `bun run dev`; Vite proxies `/api/pse` to PSE locally. Deploy
+with Vercel to use the Redis-backed route.
+
+## Frontend setup
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 

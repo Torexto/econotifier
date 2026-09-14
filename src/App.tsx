@@ -28,13 +28,43 @@ function App() {
          : window.matchMedia("(prefers-color-scheme: dark)").matches;
    });
    const [isMenuOpen, setIsMenuOpen] = useState(false);
+   const [activeSection, setActiveSection] = useState("overview");
 
    useEffect(() => {
       document.documentElement.classList.toggle("dark", isDark);
+      document.documentElement.style.colorScheme = isDark ? "dark" : "light";
       localStorage.setItem("econotifier-theme", isDark ? "dark" : "light");
+      document
+         .querySelector('meta[name="theme-color"]')
+         ?.setAttribute("content", isDark ? "#111814" : "#f5f7f3");
    }, [isDark]);
 
+   useEffect(() => {
+      const observers = navigation.map(({ href }) => {
+         const section = document.querySelector(href);
+         if (!section) return null;
+         const observer = new IntersectionObserver(
+            ([entry]) => {
+               if (entry.isIntersecting) setActiveSection(href.slice(1));
+            },
+            { rootMargin: "-25% 0px -58% 0px", threshold: 0 },
+         );
+         observer.observe(section);
+         return observer;
+      });
+
+      return () => {
+         observers.forEach((observer) => {
+            observer?.disconnect();
+         });
+      };
+   }, []);
+
    const closeMenu = () => setIsMenuOpen(false);
+   const selectSection = (href: string) => {
+      setActiveSection(href.slice(1));
+      closeMenu();
+   };
 
    return (
       <QueryClientProvider client={queryClient}>
@@ -54,7 +84,16 @@ function App() {
                      aria-label="Główna nawigacja"
                   >
                      {navigation.map(({ href, label, icon: Icon }) => (
-                        <a href={href} key={href} onClick={closeMenu}>
+                        <a
+                           aria-current={
+                              activeSection === href.slice(1)
+                                 ? "page"
+                                 : undefined
+                           }
+                           href={href}
+                           key={href}
+                           onClick={() => selectSection(href)}
+                        >
                            <Icon size={16} aria-hidden="true" />
                            {label}
                         </a>
@@ -148,6 +187,21 @@ function App() {
                   <GenerationDashboard />
                </section>
             </main>
+            <nav className="mobile-nav" aria-label="Szybka nawigacja">
+               {navigation.map(({ href, label, icon: Icon }) => (
+                  <a
+                     aria-current={
+                        activeSection === href.slice(1) ? "page" : undefined
+                     }
+                     href={href}
+                     key={href}
+                     onClick={() => selectSection(href)}
+                  >
+                     <Icon size={20} aria-hidden="true" />
+                     <span>{label}</span>
+                  </a>
+               ))}
+            </nav>
             <footer className="site-footer">
                <a className="brand" href="#overview">
                   <span className="brand-mark">
