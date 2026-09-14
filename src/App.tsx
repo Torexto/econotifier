@@ -6,16 +6,19 @@ import {
    Menu,
    Moon,
    Sun,
+   Wind,
    X,
    Zap,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { AirQualityDashboard } from "@/lib/ui/air-quality";
 import { EnergyPrice, GenerationDashboard, KseLoadChart } from "@/lib/ui/pse";
 
 const queryClient = new QueryClient();
 const navigation = [
    { href: "#overview", label: "Przegląd", icon: Activity },
    { href: "#prices", label: "Ceny energii", icon: Zap },
+   { href: "#air-quality", label: "Jakość powietrza", icon: Wind },
    { href: "#demand", label: "Zapotrzebowanie", icon: BarChart3 },
    { href: "#generation", label: "Generacja", icon: Bolt },
 ];
@@ -144,42 +147,14 @@ function App() {
                         <a className="button button-primary" href="#prices">
                            Sprawdź ceny <span aria-hidden="true">→</span>
                         </a>
-                        <a className="button button-secondary" href="#demand">
-                           Zobacz system
+                        <a
+                           className="button button-secondary"
+                           href="#air-quality"
+                        >
+                           Jakość powietrza
                         </a>
                      </div>
                   </div>
-                  <aside
-                     className="hero-status"
-                     aria-label="Status źródła danych"
-                  >
-                     <div className="hero-status-header">
-                        <span>Źródło danych</span>
-                        <span className="status-live">
-                           <i /> Aktywne
-                        </span>
-                     </div>
-                     <p className="hero-status-title">
-                        Polskie Sieci Elektroenergetyczne
-                     </p>
-                     <dl className="overview-metrics">
-                        <div>
-                           <dt>Ceny</dt>
-                           <dd>RCE</dd>
-                        </div>
-                        <div>
-                           <dt>Popyt</dt>
-                           <dd>KSE</dd>
-                        </div>
-                        <div>
-                           <dt>Generacja</dt>
-                           <dd>JW</dd>
-                        </div>
-                     </dl>
-                     <p className="hero-status-note">
-                        Dane odświeżane co 15 minut
-                     </p>
-                  </aside>
                </section>
                <section className="dashboard-section price-section" id="prices">
                   <div className="section-heading">
@@ -193,6 +168,22 @@ function App() {
                      </p>
                   </div>
                   <EnergyPrice />
+               </section>
+               <section className="dashboard-section" id="air-quality">
+                  <div className="section-heading">
+                     <div>
+                        <p className="eyebrow">
+                           <Wind size={14} aria-hidden="true" /> Środowisko i
+                           mikroklimat
+                        </p>
+                        <h2>Jakość powietrza w Twojej okolicy</h2>
+                     </div>
+                     <p>
+                        Bieżące dane pomiarowe ze stacji Państwowego Monitoringu
+                        Środowiska GIOŚ na podstawie Twojej geolokalizacji.
+                     </p>
+                  </div>
+                  <AirQualityDashboard />
                </section>
                <section className="dashboard-section" id="demand">
                   <div className="section-heading compact-heading">
@@ -229,7 +220,10 @@ function App() {
                   </span>
                   econotifier
                </a>
-               <p>Dane operacyjne: Polskie Sieci Elektroenergetyczne.</p>
+               <p>
+                  Dane operacyjne: Polskie Sieci Elektroenergetyczne oraz Główny
+                  Inspektorat Ochrony Środowiska.
+               </p>
             </footer>
          </div>
       </QueryClientProvider>
