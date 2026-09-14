@@ -23,7 +23,12 @@ export async function fetchPSEData<T extends z.ZodType>(
       throw new Error(`Failed to fetch data from ${endpoint}`);
    }
 
-   const rawValues = await response.json();
+   const json = await response.json();
+   const rawValues = Array.isArray(json)
+      ? json
+      : Array.isArray(json?.value)
+        ? json.value
+        : [];
 
    const parsed = z.array(schema).safeParse(rawValues);
 

@@ -18,6 +18,6 @@ export const generationUnitSchema = z.object({
 
 export type GenerationUnitRecord = z.infer<typeof generationUnitSchema>;
 
-export async function getGENJW(): Promise<any> {
+export async function getGENJW(): Promise<GenerationUnitRecord[]> {
    return fetchPSEData("/gen-jw", generationUnitSchema);
 }
