@@ -1,4 +1,4 @@
-import { createPseHandler } from "./_shared";
+import { createPseHandler } from "./_shared.js";
 
 const { GET, default: handler } = createPseHandler("gen-jw");
 
