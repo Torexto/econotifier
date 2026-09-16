@@ -16,6 +16,7 @@ export function KseLoadChart() {
    const { data, isLoading, isError, error } = useQuery<KseLoadRecord[]>({
       queryKey: ["kse-load"],
       queryFn: getKSELoad,
+      staleTime: 1000 * 60 * 5,
       refetchInterval: 1000 * 60 * 15,
    });
    if (isLoading)

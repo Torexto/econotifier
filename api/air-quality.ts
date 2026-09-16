@@ -153,6 +153,7 @@ export async function loadStations(): Promise<{
     try {
       const cached = await redis.get<ServerStation[]>(cacheKey);
       if (cached && Array.isArray(cached) && cached.length > 0) {
+        memoryStationsCache = { stations: cached, fetchedAt: Date.now() };
         return { stations: cached, cacheStatus: "HIT" };
       }
     } catch (err) {
@@ -167,7 +168,7 @@ export async function loadStations(): Promise<{
   ) {
     return {
       stations: memoryStationsCache.stations,
-      cacheStatus: redis ? "MISS" : "BYPASS",
+      cacheStatus: "HIT",
     };
   }
 
@@ -268,6 +269,11 @@ async function fetchStationAirQuality(
         sensors: SensorReading[];
       }>(cacheKey);
       if (cached) {
+        memoryAqCache.set(stationId, {
+          aqi: cached.aqi,
+          sensors: cached.sensors,
+          fetchedAt: Date.now(),
+        });
         return {
           aqi: cached.aqi,
           sensors: cached.sensors,
@@ -288,7 +294,7 @@ async function fetchStationAirQuality(
     return {
       aqi: memoryEntry.aqi,
       sensors: memoryEntry.sensors,
-      cacheStatus: redis ? "MISS" : "BYPASS",
+      cacheStatus: "HIT",
     };
   }
 

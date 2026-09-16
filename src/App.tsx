@@ -5,7 +5,16 @@ import { BrowserRouter, Navigate, NavLink, Route, Routes } from "react-router";
 import { AirQualityView } from "@/views/AirQualityView";
 import { EnergyView } from "@/views/EnergyView";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+   defaultOptions: {
+      queries: {
+         staleTime: 1000 * 60 * 5, // 5 minutes default freshness
+         gcTime: 1000 * 60 * 30, // 30 minutes in cache
+         refetchOnWindowFocus: false, // avoid redundant requests on tab switch
+         retry: 2,
+      },
+   },
+});
 
 export function AppContent() {
    const [isDark, setIsDark] = useState(() => {
