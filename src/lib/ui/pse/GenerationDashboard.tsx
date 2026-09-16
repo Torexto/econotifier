@@ -657,7 +657,7 @@ export const GenerationDashboard: React.FC = () => {
                            </div>
 
                            <div className="flex shrink-0 items-center gap-4">
-                              <div className="flex flex-col items-end gap-1 min-w-[110px]">
+                              <div className="flex flex-col items-end gap-1 min-w-27.5">
                                  <div className="text-sm font-bold text-slate-900 dark:text-white">
                                     {plant.totalPowerMW.toLocaleString(
                                        "pl-PL",

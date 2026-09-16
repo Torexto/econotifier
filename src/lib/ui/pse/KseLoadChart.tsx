@@ -70,7 +70,7 @@ export function KseLoadChart() {
                </p>
             </div>
 
-            <div className="h-[280px] w-full">
+            <div className="h-70 w-full">
                <ResponsiveContainer height="100%" width="100%">
                   <LineChart
                      data={formattedData}
