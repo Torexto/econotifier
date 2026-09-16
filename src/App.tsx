@@ -1,146 +1,20 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Bolt, Moon, Sun, Wind, Zap } from "lucide-react";
-import { useEffect, useState } from "react";
-import { BrowserRouter, Navigate, NavLink, Route, Routes } from "react-router";
-import { AirQualityView } from "@/views/AirQualityView";
-import { EnergyView } from "@/views/EnergyView";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
+import { Footer, MobileNavigationBar, NavigationBar } from "@/lib/ui/shared";
+import { AirQualityView, EnergyView } from "@/views";
 
 const queryClient = new QueryClient({
    defaultOptions: {
       queries: {
-         staleTime: 1000 * 60 * 5, // 5 minutes default freshness
-         gcTime: 1000 * 60 * 30, // 30 minutes in cache
-         refetchOnWindowFocus: false, // avoid redundant requests on tab switch
+         staleTime: 1000 * 60 * 5,
+         gcTime: 1000 * 60 * 30,
+         refetchOnWindowFocus: false,
          retry: 2,
       },
    },
 });
 
-export function AppContent() {
-   const [isDark, setIsDark] = useState(() => {
-      const savedTheme = localStorage.getItem("econotifier-theme");
-      return savedTheme
-         ? savedTheme === "dark"
-         : window.matchMedia("(prefers-color-scheme: dark)").matches;
-   });
-
-   useEffect(() => {
-      document.documentElement.classList.toggle("dark", isDark);
-      document.documentElement.style.colorScheme = isDark ? "dark" : "light";
-      localStorage.setItem("econotifier-theme", isDark ? "dark" : "light");
-      document
-         .querySelector('meta[name="theme-color"]')
-         ?.setAttribute("content", isDark ? "#111814" : "#f5f7f3");
-   }, [isDark]);
-
-   return (
-      <div className="app-shell">
-         <header className="site-header">
-            <div className="nav-wrap">
-               <NavLink className="brand" to="/">
-                  <span className="brand-mark">
-                     <Bolt size={18} aria-hidden="true" />
-                  </span>
-                  <span>
-                     eco<span>notifier</span>
-                  </span>
-               </NavLink>
-
-               {/* Segmented route navigation */}
-               <nav
-                  className="site-nav-segmented"
-                  aria-label="Główna nawigacja"
-               >
-                  <NavLink
-                     to="/"
-                     end
-                     className={({ isActive }) =>
-                        isActive ? "nav-segment is-active" : "nav-segment"
-                     }
-                  >
-                     <Zap size={15} aria-hidden="true" />
-                     <span>Rynek energii</span>
-                  </NavLink>
-                  <NavLink
-                     to="/air-quality"
-                     className={({ isActive }) =>
-                        isActive ? "nav-segment is-active" : "nav-segment"
-                     }
-                  >
-                     <Wind size={15} aria-hidden="true" />
-                     <span>Jakość powietrza</span>
-                  </NavLink>
-               </nav>
-
-               <div className="nav-actions">
-                  <button
-                     aria-label={
-                        isDark ? "Włącz jasny motyw" : "Włącz ciemny motyw"
-                     }
-                     className="theme-toggle"
-                     onClick={() => setIsDark((current) => !current)}
-                     type="button"
-                  >
-                     {isDark ? (
-                        <Sun size={17} aria-hidden="true" />
-                     ) : (
-                        <Moon size={17} aria-hidden="true" />
-                     )}
-                     <span>{isDark ? "Jasny" : "Ciemny"}</span>
-                  </button>
-               </div>
-            </div>
-         </header>
-
-         <main className="main-content">
-            <Routes>
-               <Route path="/" element={<EnergyView />} />
-               <Route path="/energy" element={<Navigate to="/" replace />} />
-               <Route path="/air-quality" element={<AirQualityView />} />
-               <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-         </main>
-
-         {/* Mobile bottom navigation */}
-         <nav className="mobile-nav" aria-label="Szybka nawigacja">
-            <NavLink
-               to="/"
-               end
-               className={({ isActive }) =>
-                  isActive ? "mobile-nav-item is-active" : "mobile-nav-item"
-               }
-            >
-               <Zap size={18} aria-hidden="true" />
-               <span>Energia</span>
-            </NavLink>
-            <NavLink
-               to="/air-quality"
-               className={({ isActive }) =>
-                  isActive ? "mobile-nav-item is-active" : "mobile-nav-item"
-               }
-            >
-               <Wind size={18} aria-hidden="true" />
-               <span>Powietrze</span>
-            </NavLink>
-         </nav>
-
-         <footer className="site-footer">
-            <NavLink className="brand" to="/">
-               <span className="brand-mark">
-                  <Bolt size={15} aria-hidden="true" />
-               </span>
-               econotifier
-            </NavLink>
-            <p>
-               Dane operacyjne: Polskie Sieci Elektroenergetyczne &amp; Główny
-               Inspektorat Ochrony Środowiska.
-            </p>
-         </footer>
-      </div>
-   );
-}
-
-function App() {
+export default function App() {
    return (
       <QueryClientProvider client={queryClient}>
          <BrowserRouter>
@@ -150,4 +24,22 @@ function App() {
    );
 }
 
-export default App;
+export function AppContent() {
+   return (
+      <div className="flex min-h-screen flex-col bg-[#f6f8f7] text-slate-800 antialiased selection:bg-emerald-500/20 selection:text-emerald-900 dark:bg-[#131a16] dark:text-slate-100 dark:selection:bg-emerald-500/30 dark:selection:text-emerald-200">
+         <NavigationBar />
+
+         <main className="mx-auto w-full max-w-[1180px] flex-1 px-4 py-6 sm:px-6 sm:py-8">
+            <Routes>
+               <Route path="/" element={<Navigate to="/energy" replace />} />
+               <Route path="/energy" element={<EnergyView />} />
+               <Route path="/air-quality" element={<AirQualityView />} />
+               <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+         </main>
+
+         <MobileNavigationBar />
+         <Footer />
+      </div>
+   );
+}

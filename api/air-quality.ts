@@ -183,8 +183,10 @@ export async function loadStations(): Promise<{
       let rawList: unknown[] = [];
       try {
         const response = await fetch(`${GIOS_BASE}/station/findAll?size=500`, {
-          headers: { Accept: "application/ld+json, application/json" },
-          cache: "no-store",
+          headers: {
+            Accept: "application/ld+json, application/json",
+            "Cache-Control": "no-cache",
+          },
           signal: AbortSignal.timeout(15_000),
         });
         if (response.ok) {
@@ -201,8 +203,10 @@ export async function loadStations(): Promise<{
         const response = await fetch(
           `${GIOS_BASE}/metadata/stations?page=0&size=500&sort=Kod`,
           {
-            headers: { Accept: "application/ld+json, application/json" },
-            cache: "no-store",
+            headers: {
+              Accept: "application/ld+json, application/json",
+              "Cache-Control": "no-cache",
+            },
             signal: AbortSignal.timeout(15_000),
           },
         );
@@ -304,8 +308,10 @@ async function fetchStationAirQuality(
 
   try {
     const aqiRes = await fetch(`${GIOS_BASE}/aqindex/getIndex/${stationId}`, {
-      headers: { Accept: "application/ld+json, application/json" },
-      cache: "no-store",
+      headers: {
+        Accept: "application/ld+json, application/json",
+        "Cache-Control": "no-cache",
+      },
       signal: AbortSignal.timeout(10_000),
     });
 
@@ -442,8 +448,10 @@ async function fetchStationAirQuality(
     const sensorsRes = await fetch(
       `${GIOS_BASE}/station/sensors/${stationId}`,
       {
-        headers: { Accept: "application/ld+json, application/json" },
-        cache: "no-store",
+        headers: {
+          Accept: "application/ld+json, application/json",
+          "Cache-Control": "no-cache",
+        },
         signal: AbortSignal.timeout(10_000),
       },
     );
@@ -474,8 +482,10 @@ async function fetchStationAirQuality(
           const dataRes = await fetch(
             `${GIOS_BASE}/data/getData/${sensorId}`,
             {
-              headers: { Accept: "application/ld+json, application/json" },
-              cache: "no-store",
+              headers: {
+                Accept: "application/ld+json, application/json",
+                "Cache-Control": "no-cache",
+              },
               signal: AbortSignal.timeout(6_000),
             },
           );

@@ -1,23 +1,17 @@
 import { Wind } from "lucide-react";
 import { AirQualityDashboard } from "@/lib/ui/air-quality";
+import { SectionHeading } from "@/lib/ui/shared";
 
 export function AirQualityView() {
    return (
-      <div className="view-content air-quality-view">
-         <section className="dashboard-section" id="air-quality">
-            <div className="section-heading">
-               <div>
-                  <p className="eyebrow">
-                     <Wind size={13} aria-hidden="true" /> Środowisko i
-                     mikroklimat
-                  </p>
-                  <h2>Jakość powietrza</h2>
-               </div>
-               <p>
-                  Odczyty ze stacji Państwowego Monitoringu Środowiska (GIOŚ) na
-                  podstawie Twojej geolokalizacji GPS.
-               </p>
-            </div>
+      <div className="flex flex-col gap-10">
+         <section className="scroll-mt-20" id="air-quality">
+            <SectionHeading
+               icon={<Wind size={14} aria-hidden="true" />}
+               eyebrow="Środowisko i mikroklimat"
+               title="Jakość powietrza"
+               description="Odczyty ze stacji Państwowego Monitoringu Środowiska (GIOŚ) na podstawie Twojej lokalizacji GPS lub wybranego miasta."
+            />
             <AirQualityDashboard />
          </section>
       </div>

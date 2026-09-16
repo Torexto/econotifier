@@ -16,6 +16,11 @@ export const entsoeGenerationSchema = z.object({
 
 export type EntsoeGenerationRecord = z.infer<typeof entsoeGenerationSchema>;
 
-export async function getHISGenPAL(): Promise<EntsoeGenerationRecord[]> {
-   return fetchPSEData("/his-gen-pal", entsoeGenerationSchema);
+export async function getHISGenPAL(
+   date?: string,
+): Promise<EntsoeGenerationRecord[]> {
+   return fetchPSEData("/his-gen-pal", entsoeGenerationSchema, {
+      date,
+      limit: 2000,
+   });
 }

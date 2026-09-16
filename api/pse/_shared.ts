@@ -4,7 +4,7 @@ import { Redis } from "@upstash/redis";
 const PSE_API_URL = "https://api.raporty.pse.pl/api";
 export const PSE_CACHE_TTL_SECONDS = 60 * 5; // 5 minutes
 export const DEFAULT_LIMIT = 100;
-export const MAX_LIMIT = 500;
+export const MAX_LIMIT = 2500;
 
 export const SUPPORTED_PSE_DATASETS = [
   "rce-pln",
