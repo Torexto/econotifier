@@ -1,6 +1,6 @@
 import type React from "react";
 
-interface SectionHeadingProps {
+export interface SectionHeadingProps {
    icon: React.ReactNode;
    eyebrow: string;
    title: string;

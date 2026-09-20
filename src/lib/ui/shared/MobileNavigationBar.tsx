@@ -9,7 +9,7 @@ export function MobileNavigationBar() {
          aria-label="Szybka nawigacja"
       >
          <NavLink
-            to="/"
+            to="/energy"
             end
             className={({ isActive }) =>
                cn(

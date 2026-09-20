@@ -19,7 +19,7 @@ export function FeedbackState({
       return (
          <div
             className={cn(
-               "flex min-h-[140px] items-center justify-center gap-2.5 rounded-xl border border-slate-200/80 bg-white p-6 text-sm text-slate-600 shadow-xs dark:border-slate-800 dark:bg-[#1a241e] dark:text-slate-300",
+               "flex min-h-35 items-center justify-center gap-2.5 rounded-xl border border-slate-200/80 bg-white p-6 text-sm text-slate-600 shadow-xs dark:border-slate-800 dark:bg-[#1a241e] dark:text-slate-300",
                className,
             )}
          >
@@ -33,7 +33,7 @@ export function FeedbackState({
       return (
          <div
             className={cn(
-               "flex min-h-[140px] items-center justify-center gap-2.5 rounded-xl border border-rose-200 bg-rose-50/70 p-6 text-sm text-rose-700 shadow-xs dark:border-rose-900/40 dark:bg-rose-950/20 dark:text-rose-300",
+               "flex min-h-35 items-center justify-center gap-2.5 rounded-xl border border-rose-200 bg-rose-50/70 p-6 text-sm text-rose-700 shadow-xs dark:border-rose-900/40 dark:bg-rose-950/20 dark:text-rose-300",
                className,
             )}
          >
@@ -46,7 +46,7 @@ export function FeedbackState({
    return (
       <div
          className={cn(
-            "flex min-h-[140px] items-center justify-center gap-2 rounded-xl border border-slate-200/80 bg-white p-6 text-sm text-slate-500 shadow-xs dark:border-slate-800 dark:bg-[#1a241e] dark:text-slate-400",
+            "flex min-h-35 items-center justify-center gap-2 rounded-xl border border-slate-200/80 bg-white p-6 text-sm text-slate-500 shadow-xs dark:border-slate-800 dark:bg-[#1a241e] dark:text-slate-400",
             className,
          )}
       >

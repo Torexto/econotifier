@@ -1,4 +1,4 @@
-import { Bolt, Moon, Sun, Wind, Zap } from "lucide-react";
+import { Moon, Sun, Wind, Zap } from "lucide-react";
 import { NavLink } from "react-router";
 import { useTheme } from "@/lib/hooks/useTheme";
 import { cn } from "@/lib/ui/utils";
@@ -8,15 +8,13 @@ export function NavigationBar() {
 
    return (
       <header className="sticky top-0 z-30 border-b border-slate-200/80 bg-white/90 backdrop-blur-md dark:border-emerald-900/20 dark:bg-[#131a16]/90">
-         <div className="mx-auto flex min-h-[58px] max-w-[1180px] items-center justify-between gap-4 px-4 sm:px-6">
+         <div className="mx-auto flex min-h-14.5 max-w-295 items-center justify-between gap-4 px-4 sm:px-6">
             {/* Brand */}
             <NavLink
                className="group inline-flex items-center gap-2.5 text-base font-extrabold tracking-tight text-slate-900 transition-opacity hover:opacity-90 dark:text-white"
                to="/"
             >
-               <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-700 text-emerald-100 shadow-xs transition-transform group-hover:scale-105 dark:bg-emerald-500 dark:text-slate-950">
-                  <Bolt size={16} aria-hidden="true" />
-               </span>
+               <img src="/pwa-icon-192.png" alt="Logo" className="h-7 w-7" />
                <span>
                   eco
                   <span className="text-emerald-700 dark:text-emerald-400">
@@ -31,7 +29,7 @@ export function NavigationBar() {
                aria-label="Główna nawigacja"
             >
                <NavLink
-                  to="/"
+                  to="/energy"
                   end
                   className={({ isActive }) =>
                      cn(

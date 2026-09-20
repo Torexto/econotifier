@@ -30,12 +30,12 @@
   ],
   "shortcuts": [
     {
-      "name": "Ceny energii",
-      "url": "/#prices"
+      "name": "Energia",
+      "url": "/energy"
     },
     {
-      "name": "Zapotrzebowanie KSE",
-      "url": "/#demand"
+      "name": "Jakość powietrza",
+      "url": "/air-quality"
     }
   ]
 }

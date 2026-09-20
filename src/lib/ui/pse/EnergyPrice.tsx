@@ -72,7 +72,7 @@ export function EnergyPrice() {
                <span>Planowanie zużycia</span>
             </div>
             <h3 className="text-lg font-bold text-slate-900 sm:text-xl dark:text-white">
-               Najtańsze 4 kolejne godziny
+               Godziny z najniższą ceną energii
             </h3>
             <p className="mt-2 text-xs leading-relaxed text-slate-500 sm:text-sm dark:text-slate-400">
                Włącz ładowanie samochodu, pralkę, zmywarkę lub pompę ciepła w
